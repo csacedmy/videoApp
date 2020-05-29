@@ -123,8 +123,8 @@ async function sendMail (user) {
         let transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-				user: 'csacedmy.admision@gmail.com',
-				pass: 'csacedmy@123'
+				user: 'globaliitian@gmail.com',
+				pass: 'Sand11#2'
 			}
         });
 
