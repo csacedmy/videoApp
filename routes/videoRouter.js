@@ -13,13 +13,19 @@ Router.get('/getVideo', verifyToken, (req, res) => {
             message: 'Forbidden'
         });
     } else {
-        let { skip = 0, limit = 2 } = req.query;
+        let { skip = 0, limit = 0, subcat_id } = req.query;
         skip = typeof skip === "string" ? +skip : skip;
         limit = typeof limit === "string" ? +limit : limit;
         User.find({ userToken: req.token }, (err, result) => {
             if (err) res.json({ status: false, message: err })
             if (result && result.length && result[0].subscribe) {
-                Video.find({}, (err, result) => {
+                const filter = {
+
+                }
+                if(subcat_id) {
+                    filter.subcat_id = subcat_id
+                }
+                Video.find(filter, (err, result) => {
                     if (err) res.json({ status: false, message: err })
                     res.status(200).json({ status: true, result });
                 }).skip(skip).limit(limit).populate([
